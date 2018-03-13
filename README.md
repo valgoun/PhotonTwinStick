@@ -10,7 +10,6 @@
 - Connexion aléatoire à une room
 - Creation d'une room si aucune n'est disponible
 - Feedback de tentative de connexion
-- Création synchronisé de salle d'attente
 - Création synchronisé de joueur
 - Création synchronisé de bullet (gérées localement, mais leur trigger est géré uniquement par le serveur)
 
@@ -45,6 +44,9 @@ Ces vues sont stockées dans des composants (GameViewComponent par exemple).
 
 ## Points d'améliortation
 Certain choix de design et d'implementation peuvent être améliorés:
-- les mouvements du joueurs sont client authoritatif
-- bien que les bullets soient détruites et triggered par le serveur, leur tir est client authoritatif
+- Les mouvements du joueurs sont client authoritatif. Une meilleure solutions aurait été que les clients envoie une requête de movement au serveur, pour que celui-ci réalise le mouvement et renvoie le résultat. Enfin, pour limiter l'effet de latence, le client pourrait prédire la réponse du serveur, et à la réception du résultat du serveur corriger les erreurs.
+
+
+- Bien que les bullets soient détruites et triggered par le serveur, leur tir est client authoritatif. De la même façon qu'avec les mouvements on pourrait vérifier côté serveur si le message reçu est bien conforme à l'état actuel du jeu (le joueur peut-il tirer ? est-il bien à cette position etc...)
+
 
