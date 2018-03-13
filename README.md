@@ -43,3 +43,8 @@ Ainsi comme exemple d'input ; les callbacks Unity (ou Photon) comme par exemple 
 
 Ces vues sont stockées dans des composants (GameViewComponent par exemple).
 
+## Points d'améliortation
+Certain choix de design et d'implementation peuvent être améliorés:
+- les mouvements du joueurs sont client authoritatif
+- bien que les bullets soient détruites et triggered par le serveur, leur tir est client authoritatif
+
