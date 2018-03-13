@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace TwinStick.Views
 {
+    /// <summary>
+    /// utility class to set the velocity on spawn (and reduce latency)
+    /// </summary>
     public class BulletView : PunBehaviour
     {
         public override void OnPhotonInstantiate (PhotonMessageInfo info)

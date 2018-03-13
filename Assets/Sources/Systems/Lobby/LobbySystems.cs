@@ -30,60 +30,73 @@ namespace TwinStick.Lobby
         private Systems _physicSystems;
         private Systems _serverSystems;
         private Contexts _contexts;
+        private bool _serverSystemInitialized = false;
 
         //-------------------------------------------------
         //	UNITY FUNCTIONS
         //-------------------------------------------------
-        void Awake ()
+        void Awake()
         {
             _contexts = Contexts.sharedInstance;
 
-            _systems = new Feature ("Lobby Systems");
-            _physicSystems = new Feature ("Physics Systems");
-            _serverSystems = new Feature ("Server Systems");
+            _systems = new Feature("Lobby Systems");
+            _physicSystems = new Feature("Physics Systems");
+            _serverSystems = new Feature("Server Systems");
 
-            _systems.Add (new EventStreamInitializerSystem (_contexts));
-            _systems.Add (new InputsSytem (_contexts, InputSettings));
-            _systems.Add (new CreateViewRootGameObjectSystem (_contexts, GameObject.Find ("[VIEWS]")));
-            _systems.Add (new CreateLobbyPlateformSystem (_contexts, SpawningPoints.Select (x => x.position).ToList (), LobbyPlateformPrefab.name));
-            _systems.Add (new CreateLocalPlayerSystem (_contexts, PlayerViewPrefab.name));
-            _systems.Add (new UpdatePlayerPlaneSystem (_contexts));
-            _systems.Add (new RotatePlayerSystem (_contexts));
-            _systems.Add (new ShootBulletSystem (_contexts));
-            _systems.Add (new GenerateBulletClientSystem (_contexts, this));
-            _systems.Add (new DestroySystem (_contexts));
+            _systems.Add(new EventStreamInitializerSystem(_contexts));
+            _systems.Add(new InputsSytem(_contexts, InputSettings));
+            _systems.Add(new CreateViewRootGameObjectSystem(_contexts, GameObject.Find("[VIEWS]")));
+            _systems.Add(new CreateSpawnPointSystem(_contexts, SpawningPoints.Select(x => x.position).ToList(), LobbyPlateformPrefab.name));
+            _systems.Add(new CreateLocalPlayerSystem(_contexts, PlayerViewPrefab.name));
+            _systems.Add(new UpdatePlayerPlaneSystem(_contexts));
+            _systems.Add(new RotatePlayerSystem(_contexts));
+            _systems.Add(new ShootBulletSystem(_contexts));
+            _systems.Add(new GenerateBulletClientSystem(_contexts, this));
+            _systems.Add(new DestroySystem(_contexts));
 
-            _physicSystems.Add (new MovePlayerSystem (_contexts));
-            _physicSystems.Add (new CameraFollowPlayerSystem (_contexts, CameraPivot));
+            _physicSystems.Add(new MovePlayerSystem(_contexts));
+            _physicSystems.Add(new CameraFollowPlayerSystem(_contexts, CameraPivot));
 
-            _serverSystems.Add (new GenerateBulletServerSystem (_contexts, this));
-            _serverSystems.Add (new BulletTriggerSystem (_contexts));
+            _serverSystems.Add(new GenerateBulletServerSystem(_contexts, this));
+            _serverSystems.Add(new BulletTriggerSystem(_contexts));
         }
 
-        void Start ()
+        void Start()
         {
             _contexts.network.PendingConnection = false;
-            _systems.Initialize ();
-            _physicSystems.Initialize ();
-            _serverSystems.Initialize ();
+            _systems.Initialize();
+            _physicSystems.Initialize();
+            if (PhotonNetwork.isMasterClient)
+            {
+                _serverSystems.Initialize();
+                _serverSystemInitialized = true;            }
         }
 
-        void Update ()
+        void Update()
         {
 
-            _systems.Execute ();
-            _systems.Cleanup ();
+            _systems.Execute();
+            _systems.Cleanup();
 
             if (PhotonNetwork.isMasterClient)
             {
-                _serverSystems.Execute ();
-                _serverSystems.Cleanup ();
+                _serverSystems.Execute();
+                _serverSystems.Cleanup();
             }
         }
 
-        void FixedUpdate ()
+        void FixedUpdate()
         {
-            _physicSystems.Execute ();
+            _physicSystems.Execute();
+        }
+
+        public override void OnMasterClientSwitched(PhotonPlayer newMasterClient)
+        {
+            if(newMasterClient.ID == PhotonNetwork.player.ID && !_serverSystemInitialized)
+            {
+                _serverSystemInitialized = true;
+                _serverSystems.Initialize();
+            }
         }
     }
 }

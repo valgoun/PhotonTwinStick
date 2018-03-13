@@ -9,6 +9,10 @@ using UnityEngine;
 
 namespace TwinStick.Game
 {
+    /// <summary>
+    /// It reacts to player inputs to send a message to the server to spawn a bullet
+    /// Its goals is to verify that we can shoot and then to send the position and rotation of the bullet to spawn
+    /// </summary>
     public class ShootBulletSystem : ReactiveSystem<InputEntity>
     {
         private readonly GameContext _gameContext;

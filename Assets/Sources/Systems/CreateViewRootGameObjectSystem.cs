@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace TwinStick.Utils
 {
+    /// <summary>
+    /// System that sets the ViewRootGameObject Components
+    /// </summary>
     public class CreateViewRootGameObjectSystem : IInitializeSystem
     {
         private readonly Contexts _contexts;

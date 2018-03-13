@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 namespace TwinStick.Launcher
 {
+    /// <summary>
+    /// System that switch the Connection UI according to the state of the game
+    /// </summary>
     public class ConnectionUiSystem : ReactiveSystem<NetworkEntity>
     {
         private readonly NetworkContext _context;

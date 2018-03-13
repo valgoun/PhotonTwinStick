@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace TwinStick.Launcher
 {
+    /// <summary>
+    /// System that modify the pseudo of the player according to an input field
+    /// </summary>
 	public class ModifyPseudoSystem : IInitializeSystem
 	{
 		private readonly InputField _field;

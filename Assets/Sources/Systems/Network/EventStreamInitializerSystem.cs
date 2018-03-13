@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace TwinStick.Network
 {
+    /// <summary>
+    /// System to convert Photon Event Callback into obsverables and stock in into a component
+    /// </summary>
     public class EventStreamInitializerSystem : IInitializeSystem
     {
         private readonly NetworkContext _context;

@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 namespace TwinStick.Launcher
 {
+    /// <summary>
+    /// System that connect the connection button to the ECS
+    /// </summary>
     public class ValidateButtonSystem : IInitializeSystem, ICleanupSystem
     {
         private readonly Button _button;

@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace TwinStick.Inputs
 {
+    /// <summary>
+    /// System that translate Inputs into components
+    /// </summary>
     public class InputsSytem : IInitializeSystem, IExecuteSystem, ICleanupSystem
     {
         private readonly InputContext _context;

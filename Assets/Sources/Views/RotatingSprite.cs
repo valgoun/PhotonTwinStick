@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace TwinStick.Views
 {
+
     public class RotatingSprite : MonoBehaviour
     {
         public float RotationSpeed;

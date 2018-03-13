@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace TwinStick.Game
 {
+    /// <summary>
+    /// The system react to bullet being triggered.
+    /// It marks for deletion
+    /// It clean the bullet trigger component
+    /// </summary>
     public class BulletTriggerSystem : ReactiveSystem<GameEntity>, ICleanupSystem, IInitializeSystem
     {
 

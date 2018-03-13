@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Quick Test not used in production
+/// </summary>
 public class RigidbodyCharacter : MonoBehaviour
 {
 

@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace TwinStick.Launcher
 {
+    /// <summary>
+    /// System that manage initial connection, and room creation
+    /// </summary>
     public class ConnectionSystem : ReactiveSystem<NetworkEntity>, ICleanupSystem
     {
         private readonly NetworkContext _networkContext;

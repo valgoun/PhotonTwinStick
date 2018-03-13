@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace TwinStick.Lobby
 {
+    /// <summary>
+    /// System that create the local player
+    /// </summary>
     public class CreateLocalPlayerSystem : IInitializeSystem
     {
         private readonly GameContext _context;

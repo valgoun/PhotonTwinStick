@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace TwinStick.Game
 {
+    /// <summary>
+    /// This system make the camera follow the player
+    /// It should be called at the same rate as the player's position is updated (here in FixedUpdate)
+    /// but always after the player's position is updated
+    /// </summary>
     public class CameraFollowPlayerSystem : IExecuteSystem, IInitializeSystem
     {
         private readonly Transform _camera;

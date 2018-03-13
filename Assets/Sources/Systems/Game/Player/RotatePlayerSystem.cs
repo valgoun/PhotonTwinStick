@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace TwinStick.Game
 {
+    /// <summary>
+    /// This system rotate the player according to the mouse position and its plane
+    /// </summary>
     public class RotatePlayerSystem : IExecuteSystem
     {
         private readonly GameContext _gameContext;

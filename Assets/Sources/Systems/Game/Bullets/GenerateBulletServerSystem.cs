@@ -10,6 +10,12 @@ using UnityEngine;
 
 namespace TwinStick.Game
 {
+    /// <summary>
+    /// Only run on the server
+    /// It goals is to react to a spawn bullet message from a client
+    /// and instantiating a scene object using photon
+    /// then we send to everyone a response so they can initialize their entity
+    /// </summary>
     public class GenerateBulletServerSystem : IInitializeSystem
     {
         private readonly GameContext _gameContext;
@@ -40,17 +46,6 @@ namespace TwinStick.Game
         {
             var bulletGO = PhotonNetwork.InstantiateSceneObject ("Bullet", position, rotation, 0, new object[] { 10.0f });
 
-            // bulletGO.transform.SetParent (_gameContext.viewRootGameOject.gameObject.transform);
-
-            // var bulletEntity = _gameContext.CreateEntity ();
-            // bulletEntity.AddGameView (bulletGO, bulletGO.transform);
-            // bulletEntity.AddPhysicView (bulletGO.GetComponent<Rigidbody> ());
-            // bulletEntity.AddPhotonView (bulletGO.GetComponent<PhotonView> ());
-
-            // bulletEntity.physicView.rigidbody.velocity = bulletEntity.gameView.transform.forward * 10.0f;
-
-            // Observable.Timer (TimeSpan.FromSeconds (2f)).Subscribe (_ => bulletEntity.isMarkForDeletion = true).AddTo (bulletGO);
-            // bulletGO.OnTriggerEnterAsObservable ().Subscribe (x => bulletEntity.AddBulletTriggerEnter (x)).AddTo (bulletGO);
 
             PhotonNetwork.RaiseEvent ((byte) (NetworkActions.SpawnBulletResult),
                 bulletGO.GetComponent<PhotonView> ().viewID,

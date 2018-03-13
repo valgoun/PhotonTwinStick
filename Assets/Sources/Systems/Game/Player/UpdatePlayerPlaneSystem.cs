@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace TwinStick.Game
 {
+    /// <summary>
+    /// This system updates the 3D plane on which the player moves
+    /// </summary>
     public class UpdatePlayerPlaneSystem : IExecuteSystem
     {
         private readonly GameContext _gameContext;

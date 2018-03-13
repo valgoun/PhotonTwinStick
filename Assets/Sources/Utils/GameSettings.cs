@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace TwinStick.Utils
 {
+    /// <summary>
+    /// Scriptable object to store game settings
+    /// </summary>
     [CreateAssetMenu (fileName = "GameSettings", menuName = "GameSettings")]
     public class GameSettings : ScriptableObject
     {

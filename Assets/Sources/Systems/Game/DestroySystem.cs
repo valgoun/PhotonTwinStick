@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace TwinStick.Game
 {
+    /// <summary>
+    /// Destroy every entities marked for deletion and their associated views
+    /// If the entity has a PhotonView and therefor is networked, only the owner can destroy it
+    /// </summary>
     public class DestroySystem : IInitializeSystem, ICleanupSystem
     {
         private readonly GameContext _context;

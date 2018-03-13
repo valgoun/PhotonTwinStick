@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace TwinStick.Game
 {
+    /// <summary>
+    /// This system move the player according to the move inputs
+    /// because we're using a rigidbody, this system has to run on FixedUpdate
+    /// </summary>
     public class MovePlayerSystem : IExecuteSystem
     {
         private readonly GameContext _gameContext;

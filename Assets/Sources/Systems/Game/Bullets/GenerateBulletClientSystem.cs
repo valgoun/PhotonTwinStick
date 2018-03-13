@@ -10,6 +10,11 @@ using UnityEngine;
 
 namespace TwinStick.Game
 {
+    /// <summary>
+    /// This system runs on clients and on the master client
+    /// It react to messages from the server when a bullet is spawn
+    /// Its goal is to create the associated entity
+    /// </summary>
     public class GenerateBulletClientSystem : IInitializeSystem
     {
         private readonly GameContext _gameContext;
@@ -45,10 +50,14 @@ namespace TwinStick.Game
 
             bulletEntity.physicView.rigidbody.velocity = bulletEntity.gameView.transform.forward * 10.0f;
 
+
             if (PhotonNetwork.isMasterClient)
             {
+                // Only if we are on the server
+                // we want to set a timer to destroy the bullet after 2 seconds
+                // and links its trigger to the creation of a BulletTriggerComponent on the entity
                 Observable.Timer (TimeSpan.FromSeconds (2f)).Subscribe (_ => bulletEntity.isMarkForDeletion = true).AddTo (bulletGO);
-                bulletGO.OnTriggerEnterAsObservable ().Subscribe (x => bulletEntity.AddBulletTriggerEnter (x)).AddTo (bulletGO);
+                bulletGO.OnTriggerEnterAsObservable ().Subscribe (x => bulletEntity.ReplaceBulletTriggerEnter (x)).AddTo (bulletGO);
             }
         }
     }
