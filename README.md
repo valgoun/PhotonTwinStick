@@ -1,7 +1,7 @@
 # Twin Stick Shooter Multi avec Photon
 
 ## Macro Features
-- Création et connexion aux salles d'attentes (room)
+- Création et connexion aux salles de jeu (room)
 - Mouvement et rotation synchronisées
 - Tirs synchronisés
 
@@ -11,7 +11,7 @@
 - Creation d'une room si aucune n'est disponible
 - Feedback de tentative de connexion
 - Création synchronisé de joueur
-- Création synchronisé de bullet (gérées localement, mais leur trigger est géré uniquement par le serveur)
+- Création synchronisé de bullets (gérées localement, mais leur trigger est géré uniquement par le serveur)
 
 ## Intentions
 L'intention sur le projet était de développer un petit jeu en utilisant un framework de networking haut niveau en correlation avec une architecture ECS (Entity - Component - System).
@@ -43,7 +43,7 @@ Ainsi comme exemple d'input ; les callbacks Unity (ou Photon) comme par exemple 
 Ces vues sont stockées dans des composants (GameViewComponent par exemple).
 
 ## Points d'améliortation
-Certain choix de design et d'implementation peuvent être améliorés:
+Certains choix de design et d'implementation peuvent être améliorés:
 - Les mouvements du joueurs sont client authoritatif. Une meilleure solutions aurait été que les clients envoie une requête de movement au serveur, pour que celui-ci réalise le mouvement et renvoie le résultat. Enfin, pour limiter l'effet de latence, le client pourrait prédire la réponse du serveur, et à la réception du résultat du serveur corriger les erreurs.
 
 
